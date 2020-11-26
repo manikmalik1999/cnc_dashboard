@@ -16,6 +16,7 @@ router.post('/google/login', (req,res,next)=>{
     client.verifyIdToken({idToken: tokenId, audience: "744225883265-ru7qj83bl7bqsfcarhbp6c6qqqo71e64.apps.googleusercontent.com" })
     .then(result=>{
         const {email_verified, email, name}= result.payload;
+        console.log(email);
         if(email_verified){
             User.find({email: email})
             .exec()
