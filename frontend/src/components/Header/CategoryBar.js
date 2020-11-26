@@ -10,7 +10,7 @@ export default function Categories(props) {
     const {value} = props;
   const [val, setVal] = useState(value);
  useEffect(()=>{
-   axios.get("https://cnc-project/categories")
+   axios.get("https://cnc-project.herokuapp.com/categories")
    .then((result)=>{
      console.log(result);
       setCategories(result.data.categories)

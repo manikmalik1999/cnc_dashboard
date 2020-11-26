@@ -6,7 +6,7 @@
                 "EMAIL_ID": "manik.aiotize@gmail.com",
                 "EMAIL_PASS": "cnc_project",
                 "EMAIL_VERIFY": "1357908642",
-                "DOMAIN_SERVER": "https://cnc-project",
-                "DOMAIN_CLIENT": "https://cnc-project"
+                "DOMAIN_SERVER": "https://cnc-project.herokuapp.com",
+                "DOMAIN_CLIENT": "https://cnc-project.herokuapp.com"
             }
 }

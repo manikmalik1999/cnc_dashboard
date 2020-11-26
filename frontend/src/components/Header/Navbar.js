@@ -109,7 +109,7 @@ export default function PrimarySearchAppBar(props) {
   useEffect(() => {
     axios({
       method: 'get',
-      url: "https://cnc-project/cart/",
+      url: "https://cnc-project.herokuapp.com/cart/",
       headers: {
         'Authorization': 'Bearer ' + Token,
       }
@@ -128,7 +128,7 @@ export default function PrimarySearchAppBar(props) {
           setDisplay("none");
           axios({
             method: 'get',
-            url: "https://cnc-project/users/" + res.data.userId,
+            url: "https://cnc-project.herokuapp.com/users/" + res.data.userId,
             headers: {
               'Authorization': 'Bearer ' + Token,
             }
@@ -145,7 +145,7 @@ export default function PrimarySearchAppBar(props) {
 
       axios({
         method: 'get',
-        url: "https://cnc-project/wishlist/",
+        url: "https://cnc-project.herokuapp.com/wishlist/",
         headers: {
           'Authorization': 'Bearer ' + Token,
         }
