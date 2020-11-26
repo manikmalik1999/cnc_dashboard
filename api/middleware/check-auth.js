@@ -13,7 +13,6 @@ module.exports = (req, res, next)=>{
             message:'Unauthorized',
             status: 401
         }).status(401);
-        
     }
    
 };
