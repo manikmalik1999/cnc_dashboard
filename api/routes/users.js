@@ -8,7 +8,7 @@ const nodemailer = require("nodemailer");
 const checkAuth = require("../Middleware/check-auth");
 const {OAuth2Client} = require("google-auth-library");
 const { path } = require("../../app");
-const client = new OAuth2Client("744225883265-ru7qj83bl7bqsfcarhbp6c6qqqo71e64.apps.googleusercontent.com")
+const client = new OAuth2Client("744225883265-ru7qj83bl7bqsfcarhbp6c6qqqo71e64.apps.googleusercontent.com");
 
 
 router.post('/google/login', (req,res,next)=>{
