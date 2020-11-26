@@ -1,0 +1,12 @@
+{
+    "env":  {
+                "JWT_KEY": "secret",
+                "JWT_SELLER_KEY": "sellerisking",
+                "EARLPassword": "1234567890",
+                "EMAIL_ID": "manik.aiotize@gmail.com",
+                "EMAIL_PASS": "cnc_project",
+                "EMAIL_VERIFY": "1357908642",
+                "DOMAIN_SERVER": "https://cnc-project",
+                "DOMAIN_CLIENT": "https://cnc-project"
+            }
+}
