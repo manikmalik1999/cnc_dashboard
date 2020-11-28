@@ -6,12 +6,14 @@ import './index.css';
 // import "assets/scss/material-kit-react.scss?v=1.9.0";
 import evef from "views/Signin/evef";
 import LoginPage from "views/Signin/login.js";
+import signinPage from "views/Signin/signup.js"
 
 ReactDOM.render(
 <Router>
     <Switch>
     <Route path="/evef/:token" component={evef} />
     <Route path="/login-page" component={LoginPage} />
+    <Route path="/signin-page" component={signinPage} />
     </Switch>
 </Router>
 ,
