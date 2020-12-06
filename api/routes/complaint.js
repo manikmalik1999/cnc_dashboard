@@ -2,7 +2,7 @@ const comp = require('../models/complaints');
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose'); 
-const checkAuth = require("../Middleware/check-auth");
+const checkAuth = require("../middleware/check-auth");
 
 
 // Handle incoming GET requests to /complaint
