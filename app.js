@@ -1,3 +1,8 @@
+//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
+
+
+
+
 const express = require("express");
 const app = express();
 
@@ -7,7 +12,7 @@ const mongoose = require("mongoose");
 const path = require("path");
 var cors = require('cors');
 const userRoutes = require("./api/routes/users");
-
+const complaintRoutes= require("./api/routes/complaint");
 mongoose.connect('mongodb+srv://malikmanik41:1234567890@cluster0.koktt.mongodb.net/test?retryWrites=true&w=majority', 
 { useNewUrlParser: true,  
   useUnifiedTopology: true 
@@ -41,6 +46,11 @@ app.use((req, res, next) => {
 
 // Routes which should handle requests
 app.use("/users", userRoutes);
+app.use("/complaint", complaintRoutes);
+
+//test area 
+
+
 
 if (process.env.NODE_ENV === 'production') {
   // Set static folder

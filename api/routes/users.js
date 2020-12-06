@@ -9,7 +9,8 @@ const checkAuth = require("../middleware/check-auth");
 const {OAuth2Client} = require("google-auth-library");
 const { path } = require("../../app");
 const client = new OAuth2Client("744225883265-ru7qj83bl7bqsfcarhbp6c6qqqo71e64.apps.googleusercontent.com");
-
+const Sgmail= require('@sendgrid/mail');
+Sgmail.setApiKey('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');
 
 router.post('/google/login', (req,res,next)=>{
     const{tokenId}= req.body;
@@ -75,7 +76,7 @@ router.post('/signup', (req, res, next)=>{
     User.find({email: req.body.email })
     .exec()
     .then(user =>{
-        console.log(process.env.DOMAIN_SERVER);
+        console.log(process.env.EMAIL_ID);
         console.log(req.body);
         if (user.length>=1){
             return res.json({message: "User with this e-mail ID already exists"}).status(422);}
@@ -89,33 +90,51 @@ router.post('/signup', (req, res, next)=>{
             {
                 expiresIn: '10m'
             })
-
-            var transporter = nodemailer.createTransport({
-                host: "smtp.gmail.com",
-                auth: {
-                    user: process.env.EMAIL_ID,
-                    pass: process.env.EMAIL_PASS
-                }
-              });
             
-            var mailOptions = {
-                from:  process.env.EMAIL_ID,
+            const msg= {
                 to: req.body.email,
+                from: process.env.EMAIL_ID,
                 subject: 'Account Activation Link',
                 html: `
-                    <h2>Please click on the given link to activate account.</h2>
-                    <a href="${process.env.DOMAIN_CLIENT}/evef/${token}">Activate Account</a>
+                <h2>Please click on the given link to activate account.</h2>
+                <a href="${process.env.DOMAIN_CLIENT}/evef/${token}">Activate Account</a>
                 `
-              };
-              transporter.sendMail(mailOptions, (error, info)=>{
-                if (error) {
-                  console.log(error);
-                  res.json({error : error, status: 500, message: error}).status(500)
-                } else {
-                  console.log('Email sent: ' + info.response);
-                    res.json({message: 'Email Sent', status:201}).status(201);
-                }
+              }
+              Sgmail.send(msg, function(err, info){
+                if(err){console.log("email not sent please check error: "+ err);
+                res.json({error : error, status: 500, message: error}).status(500)
+                        }
+                else {console.log("email sent successfully");
+                res.json({message: 'Email Sent', status:201}).status(201);
+                    }
               });
+              
+            // var transporter = nodemailer.createTransport({
+            //     host: "smtp.gmail.com",
+            //     auth: {
+            //         user: process.env.EMAIL_ID,
+            //         pass: process.env.EMAIL_PASS
+            //     }
+            //   });
+            
+            // var mailOptions = {
+            //     from:  process.env.EMAIL_ID,
+            //     to: req.body.email,
+            //     subject: 'Account Activation Link',
+            //     html: `
+            //         <h2>Please click on the given link to activate account.</h2>
+            //         <a href="${process.env.DOMAIN_CLIENT}/evef/${token}">Activate Account</a>
+            //     `
+            //   };
+            //   transporter.sendMail(mailOptions, (error, info)=>{
+            //     if (error) {
+            //       console.log(error);
+            //       res.json({error : error, status: 500, message: error}).status(500)
+            //     } else {
+            //       console.log('Email sent: ' + info.response);
+            //         res.json({message: 'Email Sent', status:201}).status(201);
+            //     }
+            //   });
         } 
     })
 });
@@ -188,33 +207,26 @@ router.post('/forgotpass',(req,res,next)=>{
             {
                 expiresIn: '10m'
             })
-            var transporter = nodemailer.createTransport({
-                host: "smtp.gmail.com",
-                auth: {
-                    user: process.env.EMAIL_ID,
-                    pass: process.env.EMAIL_PASS
-                }
-              });
-            
-            var mailOptions = {
-                from: process.env.EMAIL_ID,
+
+            const msg= {
                 to: req.body.email,
+                from: process.env.EMAIL_ID,
                 subject: 'Reset Password',
                 html: `
                     <h2>Please click on the given link to reset password</h2>
                     <p>If you havent requested for the password reset it is adviced you change your password immediately</p>
                     <a href="${process.env.DOMAIN_CLIENT}/resetpass/${token}">Reset My password</a>
                 `
-              };
-              transporter.sendMail(mailOptions, (error, info)=>{
-                if (error) {
-                  console.log(error);
-                  res.status(500).json({error : error})
-                } else {
-                  console.log('Email sent: ' + info.response);
-                    res.status(201).json({message: 'Link Sent at your Email ID, Please Check!' })
-                }
+              }
+              Sgmail.send(msg, function(err, info){
+                if(err){console.log("email not sent please check error: "+ err);
+                res.status(500).json({error : error});
+                        }
+                else {console.log("email sent successfully");
+                res.status(201).json({message: 'Link Sent at your Email ID, Please Check!' });
+                    }
               });
+
         }
     })
 })
