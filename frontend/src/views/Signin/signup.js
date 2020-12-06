@@ -10,8 +10,6 @@ import SnackbarContent from "components/Snackbar/SnackbarContent.js";
 import LockIcon from '@material-ui/icons/Lock';
 import PersonIcon from '@material-ui/icons/Person';
 // core components
-import Header from "components/Header/Header.js";
-import HeaderLinks from "components/Header/HeaderLinks.js";
 import Footer from "components/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
@@ -20,7 +18,7 @@ import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
+
 import TextField from '@material-ui/core/TextField';
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 import { GoogleLogin } from 'react-google-login';
