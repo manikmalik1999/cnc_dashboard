@@ -83,12 +83,14 @@ export default function OrderDisplay(props) {
 
   return (
     <div>
-   
+      <NavBar/>
         <div>
       {loading ? <div style={{minHeight:"660px"}}><Loading /></div> :
         <div style={{ marginTop: "10vh", padding: "24px" }} className={classNames(classes.main, classes.mainRaised)}>
           {/* <Categories/> */}
+         <ReviewDialog  token={Token} />
           <h4 style={{ color: "green", marginLeft: "1vw" }} ><b>My Complaints</b> ({count})</h4>
+         
           {count > 0 ? (<div className={classes.container}>
             {complaints.map(comp => (
               <div key={comp._id} style={{ margin: "2vh" }} >
@@ -102,11 +104,13 @@ export default function OrderDisplay(props) {
                       {pro.product.name}
                     </Link> */}
                     <p style={{ color: "black" }}>Category: {comp.category}</p>
+                    <p style={{ color: "black" }}>Status: {comp.status}</p>
+                    <p style={{ color: "black" }}>{comp.text}</p>
                     {/* <Link style={{ color: "#f44336", fontWeight: "400" }} to={"/Display/" + pro.productId} target="_blank">
                       £: {pro.product.price}
                     </Link> */}
                     <br />
-                    <ReviewDialog  token={Token} />
+                    {/* <ReviewDialog  token={Token} /> */}
                   </Grid>
                 </Grid>
                 <hr />

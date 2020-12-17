@@ -10,7 +10,7 @@ import signinPage from "views/Signin/signup.js"
 import forgotpass from "views/Signin/forgotpass.js"
 import resetpass from "views/Signin/resetpassword.js"
 import home from "views/HomePage/home.js"
-
+import complaint from "views/complaints/displaycomplaints.js"
 
 
 
@@ -22,6 +22,7 @@ ReactDOM.render(
     <Route path="/sign-up" component={signinPage} />
     <Route path="/fpass-page" component={forgotpass} />
     <Route path="/resetpass/:token" component={resetpass} />
+    <Route path="/complaints" component={complaint} />
     <Route path="/" component={home} />
     </Switch>
 </Router>

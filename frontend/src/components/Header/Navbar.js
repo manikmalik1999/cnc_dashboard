@@ -1,27 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
 
-import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 
 
 
 import LockOpenIcon from '@material-ui/icons/LockOpen';
-import PersonAddIcon from '@material-ui/icons/PersonAdd';
 
-import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import FavoriteIcon from '@material-ui/icons/Favorite';
+
 
 import MoreIcon from '@material-ui/icons/MoreVert';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Tooltip from '@material-ui/core/Tooltip';
 //images 
 import logo from 'assets/img/LOGO.png';
@@ -90,10 +85,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Token = sessionStorage.getItem('TokenKey');
+// const Token = sessionStorage.getItem('TokenKey');
 // const name= sessionStorage.getItem('name');
-let count = 0;
-let cnt = 0;
+
 let account = "";
 export default function PrimarySearchAppBar(props) {
 
@@ -101,7 +95,7 @@ export default function PrimarySearchAppBar(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const { value } = props;
-  const [search, setSearch] = useState(value);
+
   const [display, setDisplay] = useState("");
   const [name, setName] = useState("")
   const isMenuOpen = Boolean(anchorEl);
@@ -199,7 +193,7 @@ export default function PrimarySearchAppBar(props) {
       onClose={handleMenuClose}
       style={{ display: account }}
     >
-      <MenuItem onClick={HandleComplaints}>My complaints</MenuItem>
+      <MenuItem onClick={HandleComplaints}>My Complaints</MenuItem>
       {/* <MenuItem onClick={HandleWishlist}>My Wishlist</MenuItem> */}
       <MenuItem onClick={handleSignOut}>Sign Out</MenuItem>
     </Menu>

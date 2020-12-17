@@ -1,6 +1,5 @@
 
 
-import Displaycomplaints from 'views/complaints/displaycomplaints'
 import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -81,7 +80,7 @@ export default function FullWidthTabs() {
       </AppBar>
 
         <TabPanel value={value} index={0} dir={theme.direction}>
-          <Displaycomplaints/>
+          Item 1
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
           Item Two

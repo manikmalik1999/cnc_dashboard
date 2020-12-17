@@ -107,8 +107,8 @@ export default function FormDialog(props) {
           message={<span id="client-snackbar">{snack.message}</span>}
         />
       </Snackbar>
-      <Button style={{ backgroundColor: "#00897b", display: "inline", marginLeft: "20vw" }} variant="contained" color="primary" onClick={handleClickOpen}>
-        Add Review
+      <Button style={{ backgroundColor: "#00897b", display: "inline", marginLeft: "75vw" }} variant="contained" color="primary" onClick={handleClickOpen}>
+        New Complaint
       </Button>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Review the Product</DialogTitle>
