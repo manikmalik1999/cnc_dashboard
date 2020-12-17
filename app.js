@@ -1,8 +1,5 @@
 //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
 
-
-
-
 const express = require("express");
 const app = express();
 
@@ -13,6 +10,8 @@ const path = require("path");
 var cors = require('cors');
 const userRoutes = require("./api/routes/users");
 const complaintRoutes= require("./api/routes/complaint");
+const newsRoutes = require("./api/routes/news")
+
 mongoose.connect('mongodb+srv://malikmanik41:1234567890@cluster0.koktt.mongodb.net/test?retryWrites=true&w=majority', 
 { useNewUrlParser: true,  
   useUnifiedTopology: true 
@@ -47,9 +46,8 @@ app.use((req, res, next) => {
 // Routes which should handle requests
 app.use("/users", userRoutes);
 app.use("/complaint", complaintRoutes);
-
+app.use("/news", newsRoutes)
 //test area 
-
 
 
 if (process.env.NODE_ENV === 'production') {

@@ -24,6 +24,25 @@ router.get('/', (req, res, next) => {
   });
 });
 
+router.get('/mycomplaint', checkAuth, (req, res, next) => {
+    const {userId}= req.userData;
+    comp.find({userId: userId})
+    .select()
+    .populate('userId', 'name _id')
+    .exec()
+    .then(docs =>{
+        res.status(200).json({
+            count: docs.length,
+            complaints: docs
+        });
+    })
+    .catch(err=>{
+        res.status(500).json({
+            error: err
+        });
+    });
+  });
+
 router.post('/',checkAuth, (req, res, next) => {
 
     const {userId}= req.userData;  
@@ -40,8 +59,6 @@ router.post('/',checkAuth, (req, res, next) => {
                     message:"Complaint Registered"
                 })
             })
- 
-
     .catch(err=>{
         console.log(err);
         res.status(500).json({

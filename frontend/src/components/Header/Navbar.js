@@ -91,9 +91,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Token = sessionStorage.getItem('TokenKey');
+// const name= sessionStorage.getItem('name');
 let count = 0;
-let cnt =0;
-let account = "none";
+let cnt = 0;
+let account = "";
 export default function PrimarySearchAppBar(props) {
 
   const classes = useStyles();
@@ -107,59 +108,41 @@ export default function PrimarySearchAppBar(props) {
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   useEffect(() => {
-    axios({
-      method: 'get',
-      url: "https://cnc-project.herokuapp.com/cart/",
-      headers: {
-        'Authorization': 'Bearer ' + Token,
-      }
+    setName(sessionStorage.getItem('name'));
+          // account = "";
+          // setDisplay("none");
+          // axios({
+          //   method: 'get',
+          //   url: "http://localhost:5000/users/" + res.data.userId,
+          //   headers: {
+          //     'Authorization': 'Bearer ' + Token,
+          //   }
 
-    })
-      .then(res => {
-        console.log(res);
-        if (res.data.status === 401) {
-          count = 0;
-        }
-        else if (res.status === 404)
-          count = 0;
-        else {
-          count = res.data.count;
-          account = "";
-          setDisplay("none");
-          axios({
-            method: 'get',
-            url: "https://cnc-project.herokuapp.com/users/" + res.data.userId,
-            headers: {
-              'Authorization': 'Bearer ' + Token,
-            }
+          // }).then(res => {
+          //   console.log(res);
 
-          }).then(res => {
-            console.log(res);
+          //   setName(res.data.users.name);
 
-            setName(res.data.users.name);
+          // })
+ 
 
-          })
-        }
-
-      })
-
-      axios({
-        method: 'get',
-        url: "https://cnc-project.herokuapp.com/wishlist/",
-        headers: {
-          'Authorization': 'Bearer ' + Token,
-        }
-      }).then(res => {
-        console.log(res);
-        if (res.data.status === 401) {
-          cnt = 0;
-        }
-        else if (res.status === 404)
-          cnt = 0;
-        else {
-          cnt = res.data.count;
-        }
-      })
+      // axios({
+      //   method: 'get',
+      //   url: "http://localhost:5000/wishlist/",
+      //   headers: {
+      //     'Authorization': 'Bearer ' + Token,
+      //   }
+      // }).then(res => {
+      //   console.log(res);
+      //   if (res.data.status === 401) {
+      //     cnt = 0;
+      //   }
+      //   else if (res.status === 404)
+      //     cnt = 0;
+      //   else {
+      //     cnt = res.data.count;
+      //   }
+      // })
   }, [])
 
 
@@ -178,38 +161,32 @@ export default function PrimarySearchAppBar(props) {
 
   const handleSignOut = () => {
     sessionStorage.removeItem('TokenKey');
+    sessionStorage.removeItem('name');
     window.location.href = "/";
 
   }
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
-  const handleSearch = (e) => {
-    if(search){
-    window.location.href = "/search/" + search;
-    }
-  }
-  const HandleEnter = (e) => {
+  // const handleSearch = (e) => {
+  //   if(search){
+  //   window.location.href = "/search/" + search;
+  //   }
+  // }
+  // const HandleEnter = (e) => {
 
-    if (e.keyCode === 13) {
-      window.location.href = "/search/" + search;
-    }
+  //   if (e.keyCode === 13) {
+  //     window.location.href = "/search/" + search;
+  //   }
+  // }
+  // const handleLoginclick = (e) => {
+  //   return(<Signin stat={true} />);
+  // }
+
+  const HandleComplaints = (e) => {
+    window.location.href = "/complaints";
   }
-  const handleLoginclick = (e) => {
-    return(<Signin stat={true} />);
-  }
-  const handleSignupclick = (e) => {
-    window.location.href = "/sign-up";
-  }
-  const HandleCart = (e) => {
-    window.location.href = "/cart-page";
-  }
-  const HandleOrder = (e) => {
-    window.location.href = "/order-page";
-  }
-  const HandleWishlist = (e) => {
-    window.location.href = "/wishlist-page";
-  }
+
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -222,8 +199,8 @@ export default function PrimarySearchAppBar(props) {
       onClose={handleMenuClose}
       style={{ display: account }}
     >
-      <MenuItem onClick={HandleOrder}>My Orders</MenuItem>
-      <MenuItem onClick={HandleWishlist}>My Wishlist</MenuItem>
+      <MenuItem onClick={HandleComplaints}>My complaints</MenuItem>
+      {/* <MenuItem onClick={HandleWishlist}>My Wishlist</MenuItem> */}
       <MenuItem onClick={handleSignOut}>Sign Out</MenuItem>
     </Menu>
   );
@@ -241,7 +218,7 @@ export default function PrimarySearchAppBar(props) {
       style={{width:"600px"}}
     >
       <MenuItem>
-        <div className={classes.search}>
+        {/* <div className={classes.search}>
           <InputBase
             value={search}
             placeholder="Search for products"
@@ -253,14 +230,14 @@ export default function PrimarySearchAppBar(props) {
             onKeyDown={(e) => HandleEnter(e)}
             inputProps={{ 'aria-label': 'search' }}
           />
-        </div>
+        </div> */}
       </MenuItem>
-      <MenuItem style={{ display: display }} onClick={handleSignupclick} >
+      {/* <MenuItem style={{ display: display }} onClick={handleSignupclick} >
         <IconButton aria-label="Sign-Up" color="inherit">
           <PersonAddIcon />
         </IconButton>
         <p>Sign-Up</p>
-      </MenuItem>
+      </MenuItem> */}
       <MenuItem style={{ display: display }}>
         <IconButton aria-label="login" color="inherit">
           <LockOpenIcon />
@@ -281,7 +258,7 @@ export default function PrimarySearchAppBar(props) {
         <p style={{ display: display }} >Profile</p>
       </MenuItem>):null
       }
-      <MenuItem onClick={HandleWishlist}>
+      {/* <MenuItem onClick={HandleWishlist}>
         <IconButton aria-label="show wishlist" color="inherit">
           <Badge badgeContent={cnt} color="secondary">
             <FavoriteIcon />
@@ -296,7 +273,7 @@ export default function PrimarySearchAppBar(props) {
           </Badge>
         </IconButton>
         <p>Shopping Cart</p>
-      </MenuItem>
+      </MenuItem> */}
 
     </Menu>
   );
@@ -313,16 +290,16 @@ export default function PrimarySearchAppBar(props) {
             href="/"
           >
             {/* <MenuIcon/> */}
-            <img style={{ height: "7vh", width: "auto" }} src={logo} />
+            <img  alt="logo" style={{ height: "7vh", width: "auto" }} src={logo} />
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap style={{fontFamily:'Arial, Helvetica, sans-serif', fontSize:"1.5em"}}>
-            E-Commerce
+            CnC Dashboard
           </Typography>
 
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
 
-            <div className={classes.search}>
+            {/* <div className={classes.search}>
               <InputBase
                 value={search}
                 placeholder="Search for products"
@@ -338,7 +315,7 @@ export default function PrimarySearchAppBar(props) {
                   <SearchIcon style={{ color: "white" }} />
                 </IconButton>
               </div>
-            </div>
+            </div> */}
             { name ?
               (<Tooltip title={"Hi " + name}>
               <IconButton
@@ -354,25 +331,26 @@ export default function PrimarySearchAppBar(props) {
               </IconButton>
             </Tooltip>):(
             <Signin stat={props.stat}/>)}
+
             {/* <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <MailIcon />
               </Badge>
             </IconButton> */}
-            <Tooltip title="wishlist">
+            {/* <Tooltip title="wishlist">
               <IconButton aria-label="show user's wishlist" color="inherit" onClick={HandleWishlist}>
                 <Badge badgeContent={cnt} color="secondary">
                 <FavoriteIcon/>
                 </Badge>
               </IconButton>
-            </Tooltip>
-            <Tooltip title="cart">
+            </Tooltip> */}
+            {/* <Tooltip title="cart">
               <IconButton aria-label="show user's cart" color="inherit" onClick={HandleCart}>
                 <Badge badgeContent={count} color="secondary">
                   <ShoppingCartIcon />
                 </Badge>
               </IconButton>
-            </Tooltip>
+            </Tooltip> */}
           </div>
           <div className={classes.sectionMobile}>
             <IconButton

@@ -66,16 +66,7 @@ export default function Footer(props) {
                 Services
               </a>
             </ListItem>
-            <ListItem className={classes.inlineBlock}>
-              <a
-                href="/seller-signup"
-                className={classes.block}
-                style={clr}
-                target="_blank"
-              >
-                Sell With Us
-              </a>
-            </ListItem>
+            
             <ListItem className={classes.inlineBlock}>
               <a
                 href="https://ecom-admin-dashboard.herokuapp.com/login"
@@ -97,7 +88,7 @@ export default function Footer(props) {
             style={clr}
             target="_blank"
           >
-            Manik Malik
+            Roll No. 58, 59, 64
           </a>{" "}
         </div>
       </div>

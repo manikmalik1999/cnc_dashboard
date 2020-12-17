@@ -4,7 +4,6 @@ const mongoose = require("mongoose");
 const User= require('../models/user');
 const bcrypt= require("bcrypt");
 const jwt = require('jsonwebtoken');
-const nodemailer = require("nodemailer");
 const checkAuth = require("../middleware/check-auth");
 const {OAuth2Client} = require("google-auth-library");
 const { path } = require("../../app");
@@ -235,7 +234,8 @@ router.post('/resetPass', (req, res, next)=>{
     const {token}= req.body;
     jwt.verify(token, process.env.EMAIL_VERIFY, (err, decodedtoken)=>{
         if(err)
-           { return res.status(400).json({message: "Incorrect or Expired link"})}
+           { console.log(err);
+               return res.status(400).json({message: "Incorrect or Expired link"})}
         const {email}= decodedtoken;
         const {password}= req.body;
                 bcrypt.hash(password, 10, (err, hash)=>{
@@ -294,7 +294,7 @@ router.post('/login', (req, res, next)=>{
                         expiresIn: "1h"
                     }
                     );
-                return res.json({message: "Authorization Successful", token: token}).status(200);
+                return res.json({message: "Authorization Successful", token: token, name: user[0].name}).status(200);
             }
             else{
  

@@ -7,13 +7,22 @@ import './index.css';
 import evef from "views/Signin/evef";
 import LoginPage from "views/Signin/login.js";
 import signinPage from "views/Signin/signup.js"
+import forgotpass from "views/Signin/forgotpass.js"
+import resetpass from "views/Signin/resetpassword.js"
+import home from "views/HomePage/home.js"
+
+
+
 
 ReactDOM.render(
 <Router>
     <Switch>
     <Route path="/evef/:token" component={evef} />
     <Route path="/login-page" component={LoginPage} />
-    <Route path="/signin-page" component={signinPage} />
+    <Route path="/sign-up" component={signinPage} />
+    <Route path="/fpass-page" component={forgotpass} />
+    <Route path="/resetpass/:token" component={resetpass} />
+    <Route path="/" component={home} />
     </Switch>
 </Router>
 ,

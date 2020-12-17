@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from 'axios';
 import { GoogleLogin } from 'react-google-login';
-// import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -38,11 +37,6 @@ export default function SignUp(props) {
     setCardAnimation("");
   }, 700);
   const classes = useStyles();
-  // const { ...rest } = props;
-  // const responseGooglesuccess =(response)=>{
-  //     console.log(response);
-  //     window.location.href = "/";
-  // }
   const ResponseGoogle =(response)=>{
     if(googleavailable === false){
 
@@ -63,7 +57,7 @@ export default function SignUp(props) {
     console.log(email);
     axios({
         method: 'post',
-        url: "https://cnc-project.herokuapp.com/users/login/",
+        url: "http://localhost:5000/users/login/",
         headers: {}, 
         data: {
             email: email,
@@ -84,7 +78,7 @@ export default function SignUp(props) {
 const responseSuccessGoogle =(response)=>{
   axios({
     method: 'post',
-    url: "https://cnc-project.herokuapp.com/users/google/login/",
+    url: "http://localhost:5000/users/google/login/",
     headers: {}, 
     data: {
         tokenId: response.tokenId
@@ -156,55 +150,6 @@ const HandleLoginFaliure=()=>{
                           cookiePolicy={'single_host_origin'}
                         />
 
-                      {/* <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className={"fab fa-twitter"} />
-                      </Button> */}
-                      {/* <FacebookLogin
-                        appId="1088597931155576"
-                        autoLoad
-                        callback={responseFacebook}
-                        render={renderProps => (
-                          <Button
-                          justIcon
-                          color="transparent"
-                          onClick={renderProps.onClick}
-                                >
-                          <i className={"fab fa-facebook"} />
-                        </Button>
-                        )}
-                      /> */}
-                      {/* <FacebookLogin
-                      appId="1088597931155576"
-                      autoLoad 
-                      callback={responseFacebook}
-                      render={renderProps => (
-                        <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={renderProps.onClick}
-                      >
-                        <i className={"fab fa-facebook"} />
-                      </Button>
-                      )} */}
-                        {/* /> */}
-                      {/* <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={renderProps.onClick}
-                      >
-                        <i className={"fab fa-facebook"} />
-                      </Button> */}
-
                     </div>
                   </CardHeader>
                   <p className={classes.divider}>Or Be Classical</p>
@@ -242,46 +187,7 @@ const HandleLoginFaliure=()=>{
                       value ={password}
                       onChange={e =>{setPassword(e.target.value)}}  
                     />
-                    {/* <CustomInput
-                      labelText="Email..."
-                      id="email"
-                      value ={email}
-                      onChange={e =>{setEmail(e.target.value)}}
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      inputProps={{
-                        type: "email",
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <Email className={classes.inputIconsColor} />
-                          </InputAdornment>
-                        )
-                      }}
-                   
-                    />
-                    <CustomInput
-                      labelText="Password"
-                      id="pass"
-                      value ={password}  
-                      onChange={e =>{setPassword(e.target.value)}}
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      inputProps={{
-                        type: "password",
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <Icon className={classes.inputIconsColor}>
-                              lock_outline
-                            </Icon>
-                          </InputAdornment>
-                        ),
-                        autoComplete: "off"
-                         
-                      }}
 
-                    /> */}
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
                     <div>
@@ -292,7 +198,7 @@ const HandleLoginFaliure=()=>{
                   </CardFooter>
                   <CardFooter className={classes.cardFooter}>
                     <div>
-                    <a href="/forgotpass">Forgot Password?</a> 
+                    <a href="/fpass-page">Forgot Password?</a> 
                     </div>
                    </CardFooter>
                 </form>
