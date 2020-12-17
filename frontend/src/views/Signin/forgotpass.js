@@ -38,7 +38,7 @@ export default function ForgotPass(props) {
     
     axios({
         method: 'post',
-        url: "http://localhost:5000/users/forgotpass/",
+        url: "https://cnc-project.herokuapp.com/users/forgotpass/",
         headers: {}, 
         data: {
             email: email
