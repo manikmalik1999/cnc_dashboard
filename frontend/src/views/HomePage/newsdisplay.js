@@ -1,5 +1,6 @@
+import Loading from '../Loading';
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';;
+import axios from 'axios';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -9,7 +10,7 @@ import cimg from 'assets/img/empty_cart.png';
 import { Link } from 'react-router-dom';
 
 import classNames from "classnames";
-import Loading from '../Loading';
+
 
 // @material-ui/core components
 
