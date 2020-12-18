@@ -36,13 +36,13 @@ function Ecart() {
       <Grid container  style={{minHeight:"500px"}} spacing={3}>
         <Grid item lg={1} />
         <Grid item lg={4}>
-          <img style={{ width: "14vw", display: "block", marginLeft: "auto", marginRight: "auto" }} src={cimg} alt="Empty-Cart" />
+          {/* <img style={{ width: "14vw", display: "block", marginLeft: "auto", marginRight: "auto" }} src={cimg} alt="Empty-Cart" /> */}
         </Grid>
         <Grid item lg={7} style={{ textAlign: "center" }}>
-          <Typography color="textPrimary" variant="h2" gutterBottom>Your Orders Look Empty</Typography>
-          <Typography color="textSecondary" style={{ marginLeft: "38px" }} variant="h5" gutterBottom>Place Order now!</Typography>
+          <Typography color="textPrimary" variant="h2" gutterBottom>You Don't have any Compaliants</Typography>
+          {/* <Typography color="textSecondary" style={{ marginLeft: "38px" }} variant="h5" gutterBottom>Place Order now!</Typography> */}
           <br />
-          <Button variant="contained" style={{ display: "block", margin: "auto", width: "60%", backgroundColor: "#00897b" }} size="large" color="secondary" onClick={Home}> Shop Now</Button>
+          {/* <Button variant="contained" style={{ display: "block", margin: "auto", width: "60%", backgroundColor: "#00897b" }} size="large" color="secondary" onClick={Home}> Shop Now</Button> */}
         </Grid>
       </Grid>
     </div>
@@ -71,7 +71,9 @@ export default function OrderDisplay(props) {
     })
       .then(res => {
         if (res.data.status === 401) {
-          window.location.href = "/login-page";
+        sessionStorage.removeItem('TokenKey');
+        sessionStorage.removeItem('name');
+        window.location.href = "/";
         }
         setComplaints(res.data.complaints);
         count = res.data.count;
@@ -80,6 +82,19 @@ export default function OrderDisplay(props) {
       })
   }, [])
 
+  const handleDelete=(e)=>{
+
+    axios({
+      method: 'delete',
+      url: "https://cnc-project.herokuapp.com/complaint/"+ e,
+      headers: {
+          'Authorization': 'Bearer '+ Token,
+      }
+    }).then(res=>{
+      console.log(res);
+      window.location.href = "/complaints";
+    })
+  }
 
   return (
     <div>
@@ -109,6 +124,9 @@ export default function OrderDisplay(props) {
                     {/* <Link style={{ color: "#f44336", fontWeight: "400" }} to={"/Display/" + pro.productId} target="_blank">
                       £: {pro.product.price}
                     </Link> */}
+                    <Button  style={{ backgroundColor: "#00897b", display: "inline", marginLeft: "65vw" }} variant="contained" color="primary" onClick={()=>handleDelete(comp._id)}>
+                     Retract Complaint
+                     </Button>
                     <br />
                     {/* <ReviewDialog  token={Token} /> */}
                   </Grid>

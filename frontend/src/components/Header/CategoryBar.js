@@ -1,5 +1,5 @@
 
-
+import News from 'views/HomePage/newsdisplay'
 import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -8,6 +8,8 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -73,20 +75,20 @@ export default function FullWidthTabs() {
           
           aria-label="full width tabs example"
         >
-          <Tab label="Item One" {...a11yProps(0)} />
-          <Tab label="Item Two" {...a11yProps(1)} />
-          <Tab label="Item Three" {...a11yProps(2)} />
+          <Tab label="News" {...a11yProps(0)} />
+          <Tab label="Updates" {...a11yProps(1)} />
+          <Tab label="BOLO" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
 
         <TabPanel value={value} index={0} dir={theme.direction}>
-          Item 1
+          <News />
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          Item Two
+          Updates
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-          Item Three
+          BOLO
         </TabPanel>
     </div>
   );

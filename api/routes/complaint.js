@@ -60,8 +60,9 @@ router.post('/',checkAuth, (req, res, next) => {
                 })
             })
     .catch(err=>{
-        console.log(err);
-        res.status(500).json({
+        // console.log(err);
+        res.status(201).json({
+            message:"Error occured",
             error: err
         });
     });

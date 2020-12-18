@@ -6,36 +6,27 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import Box from '@material-ui/core/Box';
-import Rating from '@material-ui/lab/Rating';
 import { makeStyles } from '@material-ui/core/styles';
-import Star from '@material-ui/icons/Star';
 import axios from 'axios';
 import { Snackbar, SnackbarContent } from "@material-ui/core";
-
-
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 const useStyles = makeStyles({
     root: {
-      width: 200,
+      width: 400,
       display: 'flex',
       alignItems: 'center',
     },
   });
 
-const labels = {
-    1: 'Very-Dissatisfied',
-    2: 'Dissatisfied',
-    3: 'Satisfied',
-    4: 'Very-Satisfied',
-    5: 'Must-Buy',
-  };
 
 export default function FormDialog(props) {
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState(3);
-  const [hover, setHover] = React.useState(-1);
+  const [category, setCategory] = React.useState("");
   const [comments,setComments] = React.useState("");
   const classes = useStyles();
+  const [address, setAddress]= React.useState("");
   const [snack, setSnack] = useState({
     show: false,
     message: "",
@@ -56,27 +47,29 @@ export default function FormDialog(props) {
   const handleSubmit= (e)=>{
     axios({
       method: 'post',
-      url: "https://limitless-lowlands-36879.herokuapp.com/reviews",
+      url: "https://cnc-project.herokuapp.com/complaint",
       headers: {
           'Authorization': 'Bearer '+props.token,
       },
       data: {
-          value: value,
-          comment: comments,
+          category:category,
+          text: comments,
+          address: address,
       }
     }).then(res=>{
       console.log(res) ;
-      if( res.data.message === "You can't add more reviews for this product" ){
+
+      if( res.status === 201 ){
         setSnack({
           show: true,
-          message: "You can't add more reviews for this product",
+          message: res.data.message,
           color: "red"
         })
       }
       else{
         setSnack({
           show: true,
-          message: "Review Added",
+          message: "Complaint Initiated",
           color: "Green"
         })
       }
@@ -84,8 +77,6 @@ export default function FormDialog(props) {
     });
     setOpen(false);
     setComments("");
-    setHover(-1);
-    setValue(3);
   };
 
   return (
@@ -93,7 +84,7 @@ export default function FormDialog(props) {
       <Snackbar
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
         open={snack.show}
-        autoHideDuration={4000}
+        autoHideDuration={2000}
         onClose={snackbarClose}
         bodystyle={{ backgroundColor: 'teal', color: 'coral' }}
         message={<span id="message-id">{snack.message}</span>}
@@ -111,33 +102,38 @@ export default function FormDialog(props) {
         New Complaint
       </Button>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Review the Product</DialogTitle>
+        <DialogTitle id="form-dialog-title">Initiate a New Complaint</DialogTitle>
         <DialogContent>
         <div className={classes.root}>
-        <Rating
-            style={{fontSize : "60"}}
-            name="hover-feedback"
-            icon={<Star fontSize="large"/>}
-            value={value}
-            onChange={(event, newValue) => {
-                setValue(newValue);
-            }}
-            onChangeActive={(event, newHover) => {
-                setHover(newHover);
-            }}
-        />
-        {value !== null && <Box ml={2}>{labels[hover !== -1 ? hover : value]}</Box>}
+          {/* <DialogContentText>
+            Category
+          </DialogContentText> */}
+        <InputLabel shrink id="demo-simple-select-placeholder-label-label">
+          Category
+        </InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={category}
+          onChange={(e)=>{setCategory(e.target.value)}}
+        >
+          <MenuItem value={"Water"}>Water</MenuItem>
+          <MenuItem value={"Electricity"}>Electricity</MenuItem>
+          <MenuItem value={"Animal Control"}>Animal Control</MenuItem>
+        </Select>
+          {/* <TextField value={comments} id="standard-basic" label="Your views" fullWidth onChange={(e)=>{setComments(e.target.value)}}/> */}
         </div>
           <br/>
           <br/>
-          <DialogContentText>
-            Do take out some time to give your precious reviews
-          </DialogContentText>
-          <TextField value={comments} id="standard-basic" label="Your views" fullWidth onChange={(e)=>{setComments(e.target.value)}}/>
+          {/* <DialogContentText>
+            Description
+          </DialogContentText> */}
+          <TextField value={comments} id="standard-basic" label="Describe your complaint" fullWidth onChange={(e)=>{setComments(e.target.value)}}/>
+          <TextField value={address} id="standard-basic" label="Address" fullWidth onChange={(e)=>{setAddress(e.target.value)}}/>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
-            Some Other time
+            Close
           </Button>
           <Button onClick={() => handleSubmit()} color="primary">
             Add
