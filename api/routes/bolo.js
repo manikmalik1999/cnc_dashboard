@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
-const checkAuth = require("../Middleware/check-auth")
+const checkAuth = require("../middleware/check-auth")
 const Bolo = require("../models/bolo");
 const multer = require('multer');
 let conn= mongoose.connection;
