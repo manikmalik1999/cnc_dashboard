@@ -32,7 +32,7 @@ router.post('/google/login', (req,res,next)=>{
                                     expiresIn: "1h"
                                 }
                                 );
-                            return res.json({message: "Authorization Successful", token: token}).status(200);
+                            return res.json({message: "Authorization Successful", token: token, name: user[0].name}).status(200);
                     }
                 else{
                     let password = name+email+process.env.JWT_KEY; 
