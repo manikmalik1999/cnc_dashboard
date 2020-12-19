@@ -110,6 +110,7 @@ export default function Signin(props) {
       console.log(res)
       const token = res.data.token;
       sessionStorage.setItem('TokenKey', token);
+      sessionStorage.setItem('name', res.data.name);
       window.location.reload();
     })
   }

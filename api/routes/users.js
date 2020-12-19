@@ -23,6 +23,7 @@ router.post('/google/login', (req,res,next)=>{
             .then(user =>{
                     if (user.length>=1){
                             const token = jwt.sign({
+                                    name: user[0].name,
                                     email: user[0].email,
                                     userId: user[0]._id
                                 }, 
