@@ -11,6 +11,8 @@ var cors = require('cors');
 const userRoutes = require("./api/routes/users");
 const complaintRoutes= require("./api/routes/complaint");
 const newsRoutes = require("./api/routes/news")
+const updateRoute = require("./api/routes/update");
+const boloRoute = require("./api/routes/bolo");
 
 mongoose.connect('mongodb+srv://malikmanik41:1234567890@cluster0.koktt.mongodb.net/test?retryWrites=true&w=majority', 
 { useNewUrlParser: true,  
@@ -46,7 +48,9 @@ app.use((req, res, next) => {
 // Routes which should handle requests
 app.use("/users", userRoutes);
 app.use("/complaint", complaintRoutes);
-app.use("/news", newsRoutes)
+app.use("/news", newsRoutes);
+app.use("/update", updateRoute);
+app.use("/bolo", boloRoute);
 //test area 
 
 

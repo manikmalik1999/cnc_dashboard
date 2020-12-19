@@ -1,5 +1,6 @@
-
-import News from 'views/HomePage/newsdisplay'
+import Updates from 'views/HomePage/updateDisplay';
+import Bolo from 'views/HomePage/boloDisplay';
+import News from 'views/HomePage/newsdisplay';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -85,10 +86,10 @@ export default function FullWidthTabs() {
           <News />
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          Updates
+          <Updates/>
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-          BOLO
+          <Bolo/>
         </TabPanel>
     </div>
   );

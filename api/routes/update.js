@@ -21,10 +21,9 @@ router.get('/', (req, res, next) => {
     });
   });
 
-  
   router.post('/',checkAuth, (req, res, next) => {
   
-      const newUpdate = new comp({
+      const newUpdate = new update({
                   _id: mongoose.Types.ObjectId(),
                   priority: req.body.priority,
                   title: req.body.title,
