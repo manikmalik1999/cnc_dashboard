@@ -13,7 +13,7 @@ const complaintRoutes= require("./api/routes/complaint");
 const newsRoutes = require("./api/routes/news")
 const updateRoute = require("./api/routes/update");
 const boloRoute = require("./api/routes/bolo");
-
+const adminRoute = require("./api/routes/admin");
 mongoose.connect('mongodb+srv://malikmanik41:1234567890@cluster0.koktt.mongodb.net/test?retryWrites=true&w=majority', 
 { useNewUrlParser: true,  
   useUnifiedTopology: true 
@@ -51,6 +51,7 @@ app.use("/complaint", complaintRoutes);
 app.use("/news", newsRoutes);
 app.use("/update", updateRoute);
 app.use("/bolo", boloRoute);
+app.use("/admin", adminRoute);
 //test area 
 
 

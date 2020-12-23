@@ -11,7 +11,7 @@ import forgotpass from "views/Signin/forgotpass.js"
 import resetpass from "views/Signin/resetpassword.js"
 import home from "views/HomePage/home.js"
 import complaint from "views/complaints/displaycomplaints.js"
-
+import AdminDash from "views/Admin/AdminDash.js"
 
 
 ReactDOM.render(
@@ -23,6 +23,7 @@ ReactDOM.render(
     <Route path="/fpass-page" component={forgotpass} />
     <Route path="/resetpass/:token" component={resetpass} />
     <Route path="/complaints" component={complaint} />
+    <Route path="/Admin" component={AdminDash} />
     <Route path="/" component={home} />
     </Switch>
 </Router>
