@@ -289,7 +289,7 @@ export default function Signin(props) {
           </CardFooter>
           <CardFooter className={classes.cardFooter}>
             <div>
-              <a href="/forgotpass">Forgot Password?</a>
+              <a href="/fpass-page">Forgot Password?</a>
             </div>
           </CardFooter>
         </form>
