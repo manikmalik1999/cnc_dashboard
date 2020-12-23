@@ -47,7 +47,7 @@ export default function FormDialog(props) {
   const handleSubmit= (e)=>{
     axios({
       method: 'post',
-      url: "http://localhost:5000/complaint",
+      url: "https://cnc-project.herokuapp.com/complaint",
       headers: {
           'Authorization': 'Bearer '+props.token,
       },
@@ -120,6 +120,8 @@ export default function FormDialog(props) {
           <MenuItem value={"Water"}>Water</MenuItem>
           <MenuItem value={"Electricity"}>Electricity</MenuItem>
           <MenuItem value={"Animal Control"}>Animal Control</MenuItem>
+          <MenuItem value={"Animal Control"}>Road</MenuItem>
+          <MenuItem value={"Animal Control"}>Cleanliness</MenuItem>
         </Select>
           {/* <TextField value={comments} id="standard-basic" label="Your views" fullWidth onChange={(e)=>{setComments(e.target.value)}}/> */}
         </div>

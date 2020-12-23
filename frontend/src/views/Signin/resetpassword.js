@@ -46,7 +46,7 @@ export default function ResetPass(props) {
         }
       }).then(res =>{
             alert(res.data.message);
-           window.location.href = "/login-page";
+           window.location.href = "/";
         })
 }
 
