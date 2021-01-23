@@ -71,7 +71,7 @@ export default function OrderDisplay(props) {
       }
     }).then(res=>{
       console.log(res);
-      window.location.href = "/Admin";
+      window.location.href = "/Admin-dash";
     })
   }
   update.sort(

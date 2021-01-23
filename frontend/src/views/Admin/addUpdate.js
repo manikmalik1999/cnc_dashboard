@@ -86,7 +86,7 @@ export default function FormDialog(props) {
           message: "Update Added",
           color: "Green"
         });
-        window.location.href="/Admin";
+        window.location.href="/Admin-dash";
       }
       setOpen(false);
     });

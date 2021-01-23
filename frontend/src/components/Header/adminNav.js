@@ -155,7 +155,7 @@ export default function PrimarySearchAppBar(props) {
 
   const handleSignOut = () => {
     sessionStorage.removeItem('AdminToken');
-    window.location.href = "/Admin";
+    window.location.href = "/Admin-dash";
 
   }
   const handleMobileMenuOpen = (event) => {
