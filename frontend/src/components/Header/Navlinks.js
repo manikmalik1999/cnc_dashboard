@@ -79,7 +79,7 @@ export default function Signin(props) {
     console.log(email);
     axios({
       method: 'post',
-      url: "https://cnc-project.herokuapp.com/users/login/",
+      url: "http://localhost:5000/users/login/",
       headers: {},
       data: {
         email: email,
@@ -101,7 +101,7 @@ export default function Signin(props) {
   const responseSuccessGoogle = (response) => {
     axios({
       method: 'post',
-      url: "https://cnc-project.herokuapp.com/users/google/login/",
+      url: "http://localhost:5000/users/google/login/",
       headers: {},
       data: {
         tokenId: response.tokenId
@@ -149,7 +149,7 @@ export default function Signin(props) {
     } else {
       axios({
         method: 'post',
-        url: "https://cnc-project.herokuapp.com/users/signup",
+        url: "http://localhost:5000/users/signup",
         headers: {},
         data: {
           name: name,

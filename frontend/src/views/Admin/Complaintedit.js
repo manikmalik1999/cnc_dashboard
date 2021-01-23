@@ -10,15 +10,14 @@ import { makeStyles } from "@material-ui/core/styles";
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
-import Footer from "components/Footer/Footer.js";
-import cimg from 'assets/img/empty_cart.png';
-
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
 // import styles from "assets/jss/material-kit-react/views/loginPage.js";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 import Loading from '../Loading';
-
+import FormControl from '@material-ui/core/FormControl';
 // @material-ui/core components
 
 // @material-ui/icons
@@ -38,7 +37,7 @@ function Ecart() {
           {/* <img style={{ width: "14vw", display: "block", marginLeft: "auto", marginRight: "auto" }} src={cimg} alt="Empty-Cart" /> */}
         </Grid>
         <Grid item lg={7} style={{ textAlign: "center" }}>
-          <Typography color="textPrimary" variant="h2" gutterBottom>You Don't have any Compaliants</Typography>
+          <Typography color="textPrimary" variant="h2" gutterBottom>No Compliants</Typography>
           {/* <Typography color="textSecondary" style={{ marginLeft: "38px" }} variant="h5" gutterBottom>Place Order now!</Typography> */}
           <br />
           {/* <Button variant="contained" style={{ display: "block", margin: "auto", width: "60%", backgroundColor: "#00897b" }} size="large" color="secondary" onClick={Home}> Shop Now</Button> */}
@@ -49,63 +48,88 @@ function Ecart() {
 }
 
 const dashboardRoutes = [];
-let count = 0;
 const useStyles = makeStyles(styles);
-const Token = sessionStorage.getItem('TokenKey');
+const Token = sessionStorage.getItem('AdminToken');
 
 export default function OrderDisplay(props) {
   const classes = useStyles();
   const { ...rest } = props;
   const [loading, setLoading] = useState(true);
   const [complaints, setComplaints] = useState([]);
-
+  const [filter, setFilter]= useState("ALL");
   useEffect(() => {
     if(Token)
     axios({
       method: 'get',
-      url: "https://cnc-project.herokuapp.com/complaint/mycomplaint",
+      url: "http://localhost:5000/complaint/",
       headers: {
         'Authorization': 'Bearer ' + Token,
       }
     })
       .then(res => {
-        if (res.data.status === 401) {
-        sessionStorage.removeItem('TokenKey');
-        sessionStorage.removeItem('name');
-        window.location.href = "/";
-        }
+
         setComplaints(res.data.complaints);
-        count = res.data.count;
+        // count = res.data.count;
         console.log(res);
         setLoading(false);
       })
   }, [])
 
-  const handleDelete=(e)=>{
+  // const handleDelete=(e)=>{
 
-    axios({
-      method: 'delete',
-      url: "https://cnc-project.herokuapp.com/complaint/"+ e,
-      headers: {
-          'Authorization': 'Bearer '+ Token,
+  //   axios({
+  //     method: 'delete',
+  //     url: "http://localhost:5000/complaint/"+ e,
+  //     headers: {
+  //         'Authorization': 'Bearer '+ Token,
+  //     }
+  //   }).then(res=>{
+  //     console.log(res);
+  //     window.location.href = "/complaints";
+  //   })
+  // }
+
+  let filterpro = complaints.filter(
+    (e)=>{
+      if(filter!="ALL"){
+        console.log(filter, e.category, e.status);
+      return( e.category.toUpperCase().includes(filter.toUpperCase()) && e.status.toUpperCase().includes("REGISTERED"));
       }
-    }).then(res=>{
-      console.log(res);
-      window.location.href = "/complaints";
-    })
-  }
+      else return e.category;
+    }
+  )
 
   return (
     <div>
-      <NavBar/>
         <div>
       {loading ? <div style={{minHeight:"660px"}}><Loading /></div> :
+
         <div style={{ marginTop: "10vh", padding: "24px" }} className={classNames(classes.main, classes.mainRaised)}>
           {/* <Categories/> */}
-          <h4 style={{ color: "green", marginLeft: "1vw" }} ><b>My Complaints</b> ({count})</h4>
+          <div style={{float: "right"}}>
+            <FormControl className={classes.formControl}>
+          <InputLabel id="demo-simple-select-label">Filter</InputLabel>
+          <Select
+          labelId="demo-simple-select-outlined-label"
+          id="demo-simple-select-outlined"
+          value={filter}
+          onChange={(e)=>{setFilter(e.target.value)}}
+        >
+          <MenuItem value={"ALL"}>All</MenuItem>
+          <MenuItem value={"Water"}>Water</MenuItem>
+          <MenuItem value={"Electricity"}>Electricity</MenuItem>
+          <MenuItem value={"Parks"}>Parks</MenuItem>
+          <MenuItem value={"Roads"}>Roads and Public Works</MenuItem>
+          <MenuItem value={"Sewage"}>Sewage</MenuItem>
+          <MenuItem value={"Animal Control"}>Animal Control</MenuItem>
+          <MenuItem value={"Cleanliness"}>Cleanliness</MenuItem>
+        </Select>
+        </FormControl>
+        </div>
+          <h4 style={{ color: "green", marginLeft: "1vw" }} ><b>Complaints:- {filter}</b> ({filterpro.length})</h4>
          
-          {count > 0 ? (<div className={classes.container}>
-            {complaints.map(comp => (
+          {filterpro.length > 0 ? (<div className={classes.container}>
+            {filterpro.map(comp => (
               <div key={comp._id} style={{ margin: "2vh" }} >
                 <Grid className="element" container spacing={3} >
                   {/* <Grid item xs={3} container justify="center">
@@ -122,9 +146,7 @@ export default function OrderDisplay(props) {
                     {/* <Link style={{ color: "#f44336", fontWeight: "400" }} to={"/Display/" + pro.productId} target="_blank">
                       £: {pro.product.price}
                     </Link> */}
-                    <Button  style={{ backgroundColor: "#00897b", display: "inline", marginLeft: "65vw" }} variant="contained" color="primary" onClick={()=>handleDelete(comp._id)}>
-                     Retract Complaint
-                     </Button>
+
                     <br />
                     {/* <ReviewDialog  token={Token} /> */}
                   </Grid>

@@ -1,17 +1,15 @@
-import Updates from 'views/Admin/AdminUpdate';
-import Bolo from 'views/Admin/adminBOLO';
-import Complaint from 'views/Admin/Complaintedit';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
+import { makeStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import Grid from '@material-ui/core/Grid';
 
-
-
+import Updates from 'views/Admin/AdminUpdate'
+import Bolos from 'views/Admin/adminBOLO'
+import Complaints from 'views/Admin/Complaintedit'
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -19,8 +17,8 @@ function TabPanel(props) {
     <div
       role="tabpanel"
       hidden={value !== index}
-      id={`full-width-tabpanel-${index}`}
-      aria-labelledby={`full-width-tab-${index}`}
+      id={`vertical-tabpanel-${index}`}
+      aria-labelledby={`vertical-tab-${index}`}
       {...other}
     >
       {value === index && (
@@ -40,57 +38,58 @@ TabPanel.propTypes = {
 
 function a11yProps(index) {
   return {
-    id: `full-width-tab-${index}`,
-    'aria-controls': `full-width-tabpanel-${index}`,
+    id: `vertical-tab-${index}`,
+    'aria-controls': `vertical-tabpanel-${index}`,
   };
 }
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
-    width: "100%",
+    display: 'flex',
+    height: 224,
+  },
+  tabs: {
+    borderRight: `1px solid ${theme.palette.divider}`,
   },
 }));
 
-export default function FullWidthTabs() {
+export default function VerticalTabs() {
   const classes = useStyles();
-  const theme = useTheme();
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-
-
   return (
     <div className={classes.root}>
-      <AppBar position="static" color="default">
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          indicatorColor="primary"
-          textColor="primary"
-          variant="fullWidth"
-          centered
-          
-          aria-label="full width tabs example"
-        >
-          <Tab label="Complaints" {...a11yProps(0)} />
-          <Tab label="Updates" {...a11yProps(1)} />
-          <Tab label="BOLO" {...a11yProps(2)} />
-        </Tabs>
-      </AppBar>
-
-        <TabPanel value={value} index={0} dir={theme.direction}>
-          <Complaint/>
-        </TabPanel>
-        <TabPanel value={value} index={1} dir={theme.direction}>
-          <Updates/>
-        </TabPanel>
-        <TabPanel value={value} index={2} dir={theme.direction}>
-          <Bolo/>
-        </TabPanel>
+        <Grid container  style={{marginTop:"2vh"}} spacing={2}>
+      <Tabs
+        orientation="vertical"
+        variant="scrollable"
+        value={value}
+        onChange={handleChange}
+        aria-label="Vertical tabs example"
+        className={classes.tabs}
+      >
+        <Tab label="UPDATES" {...a11yProps(0)} />
+        <Tab label="BOLOS" {...a11yProps(1)} />
+        <Tab label="COMPLAINTS" {...a11yProps(2)} />
+      </Tabs>
+      <Grid item lg={10}>
+      <TabPanel value={value} index={0}>
+        <Updates/>
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+         <Bolos/>
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        <Complaints/>
+      </TabPanel>
+      </Grid>
+      </Grid>
     </div>
   );
 }

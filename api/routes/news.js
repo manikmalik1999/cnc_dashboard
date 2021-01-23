@@ -13,11 +13,11 @@ else if(day ===2 && month ===1){ day = 30; year--; month=12; }
 else day-=2; 
 
 var from = year+'-'+month+'-'+day;
-// console.log(to, from); 
+console.log(to, from); 
 router.get("/", (req, res, next)=>{
 
     newsapi.v2.everything({
-        q: 'Chandigarh',  
+        q: 'Chandigarh OR (Chandigarh AND Crime) OR PU OR Punjab ',  
         domains: 'timesofindia.indiatimes.com, tribuneindia.com, indianexpress.com, hindustantimes.com',
         from: from,
         to: to,
@@ -25,6 +25,7 @@ router.get("/", (req, res, next)=>{
         sortBy: 'relevancy',
         page: 2
       }).then(response => {
+
         // console.log(response);
         res.json({news: response}).status(200);
       }) .catch(err=>{

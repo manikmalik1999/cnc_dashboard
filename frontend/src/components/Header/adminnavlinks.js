@@ -47,13 +47,7 @@ export default function Signin(props) {
   const [password, setPassword] = useState("");
   const [googleavailable, setGoogav] = useState(true);
   const [loginFal, setLoginFal] = useState(false);
-  const [mod, setMod] = useState(false);
-  const [name, setName] = useState("");
-  const [signupcolor, setSignupColor] = useState("warning");
-  const [message, setMessage] = useState("");
-  const [open, setOpen] = React.useState(false);
   const [op, setOp] = React.useState(false);
-  const [ope,setOpe] = React.useState(false) ;
   const { ...rest } = props;
 
   const ResponseGoogle = (response) => {
@@ -64,7 +58,7 @@ export default function Signin(props) {
     console.log(email);
     axios({
       method: 'post',
-      url: "https://cnc-project.herokuapp.com/admin/login/",
+      url: "http://localhost:5000/admin/login/",
       headers: {},
       data: {
         email: email,
@@ -85,7 +79,7 @@ export default function Signin(props) {
   const responseSuccessGoogle = (response) => {
     axios({
       method: 'post',
-      url: "https://cnc-project.herokuapp.com/users/google/login/",
+      url: "http://localhost:5000/users/google/login/",
       headers: {},
       data: {
         tokenId: response.tokenId
@@ -120,37 +114,6 @@ export default function Signin(props) {
       return null;
     }
   }
-  function ValidateEmail(mail) {
-    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
-      return (true)
-    }
-    return (false)
-  }
-  
-//   const HandleSignupResponse = () => {
-//     if (message !== "") {
-//       const handleClose = (event, reason) => {
-//         if (reason === 'clickaway') {
-//           return;
-//         }
-
-//         setOpen(false);
-//         setMessage("");
-//       };
-//       setOpen(true);
-//       return (
-//         <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
-//           <Alert onClose={handleClose} severity={signupcolor}>
-//             {message}
-//           </Alert>
-//         </Snackbar>
-//       );
-
-//     }
-//     else {
-//       return null;
-//     }
-//   }
 
   return (
     <div>
@@ -246,102 +209,6 @@ export default function Signin(props) {
           </CardFooter>
         </form>
       </Dialog>
-      {/* <Dialog
-        classe={{
-          root: classe.center,
-          paper: classe.modal
-        }}
-        open={mod}
-        TransitionComponent={Transition}
-        keepMounted
-        onClose={() => setMod(false)}
-        aria-labelledby="modal-slide-title"
-        aria-describedby="modal-slide-description"
-      >
-        <form className={classes.form} style={{ width: "450px" }}>
-          <CardHeader color="success" className={classes.cardHeader}>
-            <h4>SIGN UP</h4>
-            <h4>SIGN UP</h4>
-            <GoogleLogin
-              clientId="744225883265-ru7qj83bl7bqsfcarhbp6c6qqqo71e64.apps.googleusercontent.com"
-              buttonText="Login"
-              render={renderProps => (
-                <Button
-                  justIcon
-                  color="transparent"
-                  onClick={renderProps.onClick}
-                >
-                  <i className={"fab fa-google-plus-g"} />
-                </Button>
-              )}
-              onSuccess={responseSuccessGoogle}
-              onFailure={(e) => {
-                setLoginFal(true);
-              }}
-              cookiePolicy={'single_host_origin'}
-            />
-          </CardHeader>
-          <p className={classes.divider}></p>
-          <CardBody>
-            <TextField
-              label="Name"
-              id="name"
-              type="text"
-              fullWidth
-              style={{ paddingBottom: '10%' }}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <PersonIcon style={{ color: "purple" }} />
-                  </InputAdornment>
-                )
-              }}
-
-              value={name}
-              onChange={e => { setName(e.target.value) }}
-            />
-
-            <TextField
-              label="Email..."
-              id="email"
-              type="email"
-              fullWidth
-              style={{ paddingBottom: '10%' }}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <Email style={{ color: "purple" }} />
-                  </InputAdornment>
-                )
-              }}
-
-              value={email}
-              onChange={e => { setEmail(e.target.value) }}
-            />
-            <TextField
-              label="Password"
-              id="pass"
-              type="password"
-              fullWidth
-              style={{ paddingBottom: '10%' }}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <LockIcon style={{ color: "purple" }} />
-                  </InputAdornment>
-                )
-              }}
-              value={password}
-              onChange={e => { setPassword(e.target.value) }}
-            />
-          </CardBody>
-          <CardFooter className={classes.cardFooter}>
-            <Button simple color="primary" size="lg" onClick={handleSignup}>
-              Get started
-                    </Button>
-          </CardFooter>
-        </form>
-      </Dialog> */}
     </div>
   );
 }

@@ -5,7 +5,7 @@
                 "EARLPassword": "1234567890",
                 "EMAIL_ID": "manikmalik123abc@gmail.com",
                 "EMAIL_VERIFY": "1357908642",
-                "DOMAIN_SERVER": "https://cnc-project.herokuapp.com",
-                "DOMAIN_CLIENT": "https://cnc-project.herokuapp.com"
+                "DOMAIN_SERVER": "http://localhost:5000",
+                "DOMAIN_CLIENT": "http://localhost:5000"
             }
 }

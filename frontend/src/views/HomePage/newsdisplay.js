@@ -54,7 +54,7 @@ export default function OrderDisplay(props) {
   useEffect(() => {
     axios({
       method: 'get',
-      url: "https://cnc-project.herokuapp.com/news",
+      url: "http://localhost:5000/news",
       headers: {
         'Authorization': 'Bearer ' + Token,
       }

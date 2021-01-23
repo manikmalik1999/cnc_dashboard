@@ -4,7 +4,6 @@ import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
@@ -47,7 +46,7 @@ export default function FormDialog(props) {
   const handleSubmit= (e)=>{
     axios({
       method: 'post',
-      url: "https://cnc-project.herokuapp.com/complaint",
+      url: "http://localhost:5000/complaint",
       headers: {
           'Authorization': 'Bearer '+props.token,
       },
@@ -120,6 +119,10 @@ export default function FormDialog(props) {
           <MenuItem value={"Water"}>Water</MenuItem>
           <MenuItem value={"Electricity"}>Electricity</MenuItem>
           <MenuItem value={"Animal Control"}>Animal Control</MenuItem>
+          <MenuItem value={"Roads"}>Roads and Public Works</MenuItem>
+          <MenuItem value={"Parks"}>Parks</MenuItem>
+          <MenuItem value={"Sewage"}>Sewage</MenuItem>
+          <MenuItem value={"Cleanliness"}>Cleanliness</MenuItem>
         </Select>
           {/* <TextField value={comments} id="standard-basic" label="Your views" fullWidth onChange={(e)=>{setComments(e.target.value)}}/> */}
         </div>

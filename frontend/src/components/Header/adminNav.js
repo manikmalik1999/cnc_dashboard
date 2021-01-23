@@ -107,7 +107,7 @@ export default function PrimarySearchAppBar(props) {
           // setDisplay("none");
           // axios({
           //   method: 'get',
-          //   url: "https://cnc-project.herokuapp.com/users/" + res.data.userId,
+          //   url: "http://localhost:5000/users/" + res.data.userId,
           //   headers: {
           //     'Authorization': 'Bearer ' + Token,
           //   }
@@ -122,7 +122,7 @@ export default function PrimarySearchAppBar(props) {
 
       // axios({
       //   method: 'get',
-      //   url: "https://cnc-project.herokuapp.com/wishlist/",
+      //   url: "http://localhost:5000/wishlist/",
       //   headers: {
       //     'Authorization': 'Bearer ' + Token,
       //   }
@@ -154,7 +154,7 @@ export default function PrimarySearchAppBar(props) {
   };
 
   const handleSignOut = () => {
-    sessionStorage.removeItem('name');
+    sessionStorage.removeItem('AdminToken');
     window.location.href = "/Admin";
 
   }
@@ -209,8 +209,8 @@ export default function PrimarySearchAppBar(props) {
       onClose={handleMobileMenuClose}
       style={{width:"600px"}}
     >
-      <MenuItem>
-        {/* <div className={classes.search}>
+      {/* <MenuItem>
+        <div className={classes.search}>
           <InputBase
             value={search}
             placeholder="Search for products"
@@ -222,8 +222,8 @@ export default function PrimarySearchAppBar(props) {
             onKeyDown={(e) => HandleEnter(e)}
             inputProps={{ 'aria-label': 'search' }}
           />
-        </div> */}
-      </MenuItem>
+        </div>
+      </MenuItem> */}
       {/* <MenuItem style={{ display: display }} onClick={handleSignupclick} >
         <IconButton aria-label="Sign-Up" color="inherit">
           <PersonAddIcon />

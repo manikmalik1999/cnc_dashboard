@@ -5,7 +5,7 @@ export default function Emailverify(props){
     console.log(token);
     axios({
         method: 'post',
-        url: "https://cnc-project.herokuapp.com/users/verify/",
+        url: "http://localhost:5000/users/verify/",
         headers: {}, 
         data: {
             token: token

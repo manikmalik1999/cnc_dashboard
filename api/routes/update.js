@@ -45,12 +45,12 @@ router.get('/', (req, res, next) => {
       });
   
   
-  router.delete('/:updateId',checkAuth,(req, res, next) => {
-      comp.remove({_id: req.params.complaintId}).exec()
+  router.delete('/:updateId',checkAuth, (req, res, next) => {
+    update.remove({_id: req.params.updateId}).exec()
       .then(result=>{
           res.status(200).json({
               message: "Update Removed",
-              
+
           })
       })
       .catch(err=>{

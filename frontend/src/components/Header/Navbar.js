@@ -107,7 +107,7 @@ export default function PrimarySearchAppBar(props) {
           // setDisplay("none");
           // axios({
           //   method: 'get',
-          //   url: "https://cnc-project.herokuapp.com/users/" + res.data.userId,
+          //   url: "http://localhost:5000/users/" + res.data.userId,
           //   headers: {
           //     'Authorization': 'Bearer ' + Token,
           //   }
@@ -122,7 +122,7 @@ export default function PrimarySearchAppBar(props) {
 
       // axios({
       //   method: 'get',
-      //   url: "https://cnc-project.herokuapp.com/wishlist/",
+      //   url: "http://localhost:5000/wishlist/",
       //   headers: {
       //     'Authorization': 'Bearer ' + Token,
       //   }

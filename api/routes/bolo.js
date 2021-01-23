@@ -135,41 +135,42 @@ router.get("/image/:filename", (req, res, next )=>{
   });
 
   router.delete("/:boloId",checkAuth, (req, res, next) => {
-
+    
     const id = req.params.boloId;
-    Product.findById(id)
+    Bolo.findById(id)
     .exec()
     .then(product=>{
       console.log(product);
       let filename1= product.image.substring(15);
       console.log(filename1);
       gfs.remove({filename: filename1,  root: 'uploads'}, (err)=> {
-        if (err) console.log('faliure');
+        if (err) {console.log('faliure');
+        return res.json({
+          message: "Something went Wrong"
+        });
+      }
        else console.log('success');
       });
     }).catch(err=>{
-      res.status(500).json({
-        message:"Images not deleted"
+      console.log(error);
+      return res.json({
+        message: "Something went Wrong"
       })
+      
     });
   
-    
     console.log(id);
     Bolo.deleteOne({ _id: id })
       .exec()
       .then(response=> {
         res.status(200).json({
           message: 'product deleted',
-        //   request:{
-        //     type: 'POST',
-        //     url: 'https://limitless-lowlands-36879.herokuapp.com/products',
-        //     body: {name: 'String', quantity: 'Number'}
-        //   }
         }
           );
       })
       .catch(err => {
-        res.status(500).json({
+
+       return res.status(500).json({
           error: err,
           message:" something is wrong"
         });

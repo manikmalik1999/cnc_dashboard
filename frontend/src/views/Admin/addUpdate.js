@@ -1,32 +1,46 @@
 import React , { useState } from 'react';
-import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 import { Snackbar, SnackbarContent } from "@material-ui/core";
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
-const useStyles = makeStyles({
+import IconButton from '@material-ui/core/IconButton';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
+import CardBody from "components/Card/CardBody.js";
+import CardHeader from "components/Card/CardHeader.js";
+import CardFooter from "components/Card/CardFooter.js";
+import modalStyle from "assets/jss/material-kit-react/modalStyle.js";
+import Slide from "@material-ui/core/Slide";
+import Button from "components/CustomButtons/Button.js";
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="down" ref={ref} {...props} />;
+});
+
+const useStyles = makeStyles((theme)=>({
     root: {
-      width: 400,
+      width: 500,
       display: 'flex',
       alignItems: 'center',
     },
-  });
-
+    formControl: {
+      margin: theme.spacing(1),
+      minWidth: 120,
+    },
+  }));
+  const usStyles = makeStyles(modalStyle);
 
 export default function FormDialog(props) {
   const [open, setOpen] = React.useState(false);
-  const [category, setCategory] = React.useState("");
-  const [comments,setComments] = React.useState("");
+  const [priority, setPriority] = React.useState(0);
+  const [text,setText] = React.useState("");
   const classes = useStyles();
-  const [address, setAddress]= React.useState("");
+  const classe = usStyles();
+  const [title, setTitle]= React.useState("");
   const [snack, setSnack] = useState({
     show: false,
     message: "",
@@ -47,14 +61,14 @@ export default function FormDialog(props) {
   const handleSubmit= (e)=>{
     axios({
       method: 'post',
-      url: "https://cnc-project.herokuapp.com/complaint",
+      url: "http://localhost:5000/update",
       headers: {
-          'Authorization': 'Bearer '+props.token,
+          'Authorization': 'Bearer '+ props.token,
       },
       data: {
-          category:category,
-          text: comments,
-          address: address,
+          title: title,
+          text: text,
+          priority: priority,
       }
     }).then(res=>{
       console.log(res) ;
@@ -69,14 +83,14 @@ export default function FormDialog(props) {
       else{
         setSnack({
           show: true,
-          message: "Complaint Initiated",
+          message: "Update Added",
           color: "Green"
-        })
+        });
+        window.location.href="/Admin";
       }
       setOpen(false);
     });
     setOpen(false);
-    setComments("");
   };
 
   return (
@@ -98,47 +112,90 @@ export default function FormDialog(props) {
           message={<span id="client-snackbar">{snack.message}</span>}
         />
       </Snackbar>
-      <Button style={{ backgroundColor: "#00897b", display: "inline", marginLeft: "75vw" }} variant="contained" color="primary" onClick={handleClickOpen}>
+      {/* <Button style={{ backgroundColor: "#00897b", display: "inline", marginLeft: "75vw" }} variant="contained" color="primary" onClick={handleClickOpen}>
         New Complaint
-      </Button>
-      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Initiate a New Complaint</DialogTitle>
-        <DialogContent>
-        <div className={classes.root}>
-          {/* <DialogContentText>
-            Category
-          </DialogContentText> */}
-        <InputLabel shrink id="demo-simple-select-placeholder-label-label">
-          Category
-        </InputLabel>
-        <Select
+      </Button> */}
+      
+      <IconButton style={{ display: "inline", marginLeft: "75vw" }} color="primary" onClick={handleClickOpen} aria-label="delete" >
+                      <AddCircleIcon style={{fontSize: "2.5vw"}} />
+      </IconButton>
+
+
+      <Dialog
+        classes={{
+          root: classe.center,
+          paper: classe.modal
+        }}
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-labelledby="modal-slide-title"
+        aria-describedby="modal-slide-description">
+        <form style={{marginTop:"5vh"}}className={classes.form}>
+        
+          <CardHeader color="success" className={classes.cardHeader}>
+            <h4>Add Updates</h4>
+          </CardHeader>
+          <div className={classes.socialLine}>
+            </div>
+          <CardBody>
+            <TextField
+              label="Title"
+              id="title"
+              type="text"
+              fullWidth
+              style={{ paddingBottom: '10%' }}
+              InputProps={{
+                // endAdornment: (
+                //   <InputAdornment position="end">
+                //     {/* <Email style={{ color: "purple" }} /> */}
+                //   </InputAdornment>
+                // )
+              }}
+
+              value={title}
+              onChange={e => { setTitle(e.target.value) }}
+            />
+            <TextField
+              label="Details"
+              id="text"
+              type="text"
+              fullWidth
+              style={{ paddingBottom: '10%' }}
+              InputProps={{
+                // endAdornment: (
+                //   <InputAdornment position="end">
+                //     <LockIcon style={{ color: "purple" }} />
+                //   </InputAdornment>
+                // )
+              }}
+              value={text}
+              onChange={e => { setText(e.target.value) }}
+            />
+
+      <FormControl className={classes.formControl}>  
+        <InputLabel id="demo-simple-select-label">Priority</InputLabel>
+          <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={category}
-          onChange={(e)=>{setCategory(e.target.value)}}
+          value={priority}
+          onChange={(e)=>{setPriority(e.target.value)}}
         >
-          <MenuItem value={"Water"}>Water</MenuItem>
-          <MenuItem value={"Electricity"}>Electricity</MenuItem>
-          <MenuItem value={"Animal Control"}>Animal Control</MenuItem>
+          <MenuItem value={1}>Warning</MenuItem>
+          <MenuItem value={2}>Advice</MenuItem>
+          <MenuItem value={3}>Information</MenuItem>
         </Select>
-          {/* <TextField value={comments} id="standard-basic" label="Your views" fullWidth onChange={(e)=>{setComments(e.target.value)}}/> */}
-        </div>
-          <br/>
-          <br/>
-          {/* <DialogContentText>
-            Description
-          </DialogContentText> */}
-          <TextField value={comments} id="standard-basic" label="Describe your complaint" fullWidth onChange={(e)=>{setComments(e.target.value)}}/>
-          <TextField value={address} id="standard-basic" label="Address" fullWidth onChange={(e)=>{setAddress(e.target.value)}}/>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Close
-          </Button>
-          <Button onClick={() => handleSubmit()} color="primary">
-            Add
-          </Button>
-        </DialogActions>
+        </FormControl>
+          </CardBody>
+          <CardFooter className={classes.cardFooter}>
+            <div>
+              <Button simple color="success" size="lg" onClick={handleSubmit}>
+                Add
+            </Button> 
+            </div>
+          </CardFooter>
+        </form>
       </Dialog>
     </div>
   );
