@@ -109,7 +109,7 @@ export default function FormDialog(props) {
       console.log(formData);
       axios({
         method: 'post',
-        url: "http://localhost:5000/bolo",
+        url: "https://cnc-project.herokuapp.com/bolo",
         data: formData,
         headers: {
           'Authorization': 'Bearer ' + props.token,

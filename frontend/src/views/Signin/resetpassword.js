@@ -38,7 +38,7 @@ export default function ResetPass(props) {
     
     axios({
         method: 'post',
-        url: "http://localhost:5000/users/resetPass/",
+        url: "https://cnc-project.herokuapp.com/users/resetPass/",
         headers: {}, 
         data: {
             token: token,

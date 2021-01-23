@@ -49,7 +49,7 @@ export default function OrderDisplay(props) {
   useEffect(() => {
     axios({
       method: 'get',
-      url: "http://localhost:5000/update",
+      url: "https://cnc-project.herokuapp.com/update",
       headers: {
         'Authorization': 'Bearer ' + Token,
       }
@@ -65,7 +65,7 @@ export default function OrderDisplay(props) {
 
     axios({
       method: 'delete',
-      url: "http://localhost:5000/update/"+ e,
+      url: "https://cnc-project.herokuapp.com/update/"+ e,
       headers: {
           'Authorization': 'Bearer '+ Token,
       }

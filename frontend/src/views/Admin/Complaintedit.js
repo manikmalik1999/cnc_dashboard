@@ -61,7 +61,7 @@ export default function OrderDisplay(props) {
     if(Token)
     axios({
       method: 'get',
-      url: "http://localhost:5000/complaint/",
+      url: "https://cnc-project.herokuapp.com/complaint/",
       headers: {
         'Authorization': 'Bearer ' + Token,
       }
@@ -79,7 +79,7 @@ export default function OrderDisplay(props) {
 
   //   axios({
   //     method: 'delete',
-  //     url: "http://localhost:5000/complaint/"+ e,
+  //     url: "https://cnc-project.herokuapp.com/complaint/"+ e,
   //     headers: {
   //         'Authorization': 'Bearer '+ Token,
   //     }

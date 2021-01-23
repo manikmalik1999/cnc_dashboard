@@ -44,7 +44,7 @@ export default function SignUp(props) {
   const responseSuccessGoogle =(response)=>{
     axios({
       method: 'post',
-      url: "http://localhost:5000/users/google/login/",
+      url: "https://cnc-project.herokuapp.com/users/google/login/",
       headers: {}, 
       data: {
           tokenId: response.tokenId
@@ -75,7 +75,7 @@ export default function SignUp(props) {
   function handleSignup(e){
     axios({
         method: 'post',
-        url: "http://localhost:5000/users/signup",
+        url: "https://cnc-project.herokuapp.com/users/signup",
         headers: {}, 
         data: {
             name: name,  

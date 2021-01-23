@@ -46,7 +46,7 @@ export default function FormDialog(props) {
   const handleSubmit= (e)=>{
     axios({
       method: 'post',
-      url: "http://localhost:5000/complaint",
+      url: "https://cnc-project.herokuapp.com/complaint",
       headers: {
           'Authorization': 'Bearer '+props.token,
       },

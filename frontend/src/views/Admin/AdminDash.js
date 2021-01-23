@@ -67,7 +67,7 @@ export default function LandingPage(props) {
   useEffect(() => {
           axios({
             method: 'get',
-            url: "http://localhost:5000/admin/",
+            url: "https://cnc-project.herokuapp.com/admin/",
             headers: {
               'Authorization': 'Bearer ' + token,
             }

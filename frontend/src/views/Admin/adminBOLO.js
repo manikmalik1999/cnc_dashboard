@@ -31,7 +31,7 @@ export default function OrderDisplay(props) {
     console.log(count);
     axios({
       method: 'get',
-      url: "http://localhost:5000/bolo",
+      url: "https://cnc-project.herokuapp.com/bolo",
       headers: {
         'Authorization': 'Bearer ' + Token,
       }
@@ -43,14 +43,14 @@ export default function OrderDisplay(props) {
       })
   }, [])
 const imageClick=(e)=>{
-    window.open("http://localhost:5000/"+ e);
+    window.open("https://cnc-project.herokuapp.com/"+ e);
 }
 
 const handleDelete=(e)=>{
 
   axios({
     method: 'delete',
-    url: "http://localhost:5000/bolo/"+ e,
+    url: "https://cnc-project.herokuapp.com/bolo/"+ e,
     headers: {
         'Authorization': 'Bearer '+ Token,
     }
@@ -77,7 +77,7 @@ const handleDelete=(e)=>{
               <div key={comp._id} style={{ margin: "2vh" }} >
                 <Grid className="element" container spacing={3} >
                   <Grid item xs={3} container justify="center">
-                    <img onClick ={()=>imageClick(comp.image)} style={{ height: "20vh", width: "auto",margin:"auto",padding:"auto" }} src= {"http://localhost:5000/"+ comp.image} />
+                    <img onClick ={()=>imageClick(comp.image)} style={{ height: "20vh", width: "auto",margin:"auto",padding:"auto" }} src= {"https://cnc-project.herokuapp.com/"+ comp.image} />
                   </Grid>
                   <hr />
                   <Grid item xs={6} style={{ textAlign: "top", paddingLeft: "32px" }}>
