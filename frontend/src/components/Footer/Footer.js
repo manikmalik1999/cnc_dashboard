@@ -69,7 +69,7 @@ export default function Footer(props) {
             
             <ListItem className={classes.inlineBlock}>
               <a
-                href="https://cnc-project.herokuapp.com/Admin"
+                href="https://cnc-project.herokuapp.com/Admin-dash"
                 className={classes.block}
                 style={clr}
                 target="_blank"

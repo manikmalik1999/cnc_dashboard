@@ -23,7 +23,7 @@ ReactDOM.render(
     <Route path="/fpass-page" component={forgotpass} />
     <Route path="/resetpass/:token" component={resetpass} />
     <Route path="/complaints" component={complaint} />
-    <Route path="/Admin" component={AdminDash} />
+    <Route path="/Admin-dash" component={AdminDash} />
     <Route path="/" component={home} />
     </Switch>
 </Router>
